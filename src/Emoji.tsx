@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 type EmojiKeys = "feliz" | "morto" | "doente";
 
 const EmojiMap = new Map<EmojiKeys, string>([
@@ -7,11 +9,21 @@ const EmojiMap = new Map<EmojiKeys, string>([
 ]);
 
 export default function Emoji() {
-    let status:EmojiKeys = "doente";
+    const [status, setStatus] = useState<EmojiKeys>("morto");
 
     function felizClick() {
         console.log("feliz?");
-        status = "feliz";
+        setStatus("feliz");
+    }
+
+    function mortoClick() {
+        console.log("morto!");
+        setStatus("morto")
+    }
+
+    function doenteClick() {
+        console.log("morto!");
+        setStatus("doente")
     }
 
     return (
@@ -19,6 +31,8 @@ export default function Emoji() {
             <div className="emoji">{EmojiMap.get(status) || "🙃"}</div>
             <div className="acoes">
                 <button onClick={felizClick}>Feliz</button>
+                <button onClick={mortoClick}>Morto</button>
+                <button onClick={doenteClick}>Doente</button>
             </div>
         </>
     )
