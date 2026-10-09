@@ -1,4 +1,6 @@
 import { useState } from "react";
+import Atributo from "./Atributo";
+import './emoji.css'
 
 type EmojiKeys = "feliz" | "morto" | "doente";
 
@@ -29,13 +31,13 @@ export default function Emoji() {
             
             case "morto":
                 setStatus("feliz")
-                break
         }             
     }
 
     return (
         <>
             <div className="emoji">{EmojiMap.get(status) || "🙃"}</div>
+            <Atributo/>
             <div className="acoes">
                 <button onClick={felizClick}>Feliz</button>
                 <button onClick={mortoClick}>Morto</button>
