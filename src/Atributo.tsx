@@ -2,15 +2,6 @@ import { useState } from "react"
 
 export default function Atributo() {     
     const [valor,setValor] = useState<number>(1)
-    let coracoes = ""
-    for(let i = 0; i < 5; i++) {
-        if(i < valor) {
-            coracoes += "❤️"
-        }
-        else {
-            coracoes += "🩶"
-        }
-    }
 
     function coracaoClick() {
         if(valor === 5)
@@ -22,7 +13,7 @@ export default function Atributo() {
 
     return (
         <>
-            <div className="atributo">{valor}{coracoes}</div>
+            <div className="atributo">{valor} {"❤️".repeat(valor)}{"🩶".repeat(5 - valor)}</div>
             <button onClick={coracaoClick}>+</button>
         </>
     )
