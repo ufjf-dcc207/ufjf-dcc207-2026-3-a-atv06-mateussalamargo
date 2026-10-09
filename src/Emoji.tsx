@@ -9,21 +9,28 @@ const EmojiMap = new Map<EmojiKeys, string>([
 ]);
 
 export default function Emoji() {
-    const [status, setStatus] = useState<EmojiKeys>("morto");
+    const [status, setStatus] = useState<EmojiKeys>("feliz");
 
-    function felizClick() {
-        console.log("feliz?");
-        setStatus("feliz");
-    }
+    function felizClick() {setStatus("feliz")}
 
-    function mortoClick() {
-        console.log("morto!");
-        setStatus("morto")
-    }
+    function mortoClick() {setStatus("morto")}
 
-    function doenteClick() {
-        console.log("morto!");
-        setStatus("doente")
+    function doenteClick() {setStatus("doente")}
+    
+    function cicloClick() {
+        switch(status) {
+            case "feliz":
+                setStatus("doente")
+                break
+            
+            case "doente":
+                setStatus("morto")
+                break
+            
+            case "morto":
+                setStatus("feliz")
+                break
+        }             
     }
 
     return (
@@ -33,6 +40,7 @@ export default function Emoji() {
                 <button onClick={felizClick}>Feliz</button>
                 <button onClick={mortoClick}>Morto</button>
                 <button onClick={doenteClick}>Doente</button>
+                <button onClick={cicloClick}>Ciclo</button>
             </div>
         </>
     )
