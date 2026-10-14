@@ -1,7 +1,21 @@
 .emoji {
-    font-size: 4em;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+    gap: 5em;
+
+    .rosto {
+        font-size: 4em;
+        margin: 1em;
+        display: grid;
+        align-items: center;
+    }
+
+    .acoes {
+        display: flex;
+        flex-direction: column;
+        gap: 4px
+    }
+
 }
 
-.acoes {
-    gap: 5px;
-}

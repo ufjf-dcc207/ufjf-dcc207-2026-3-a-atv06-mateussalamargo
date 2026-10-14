@@ -13,11 +13,11 @@ const EmojiMap = new Map<EmojiKeys, string>([
 export default function Emoji() {
     const [status, setStatus] = useState<EmojiKeys>("feliz");
 
-    function felizClick() {setStatus("feliz")}
+    function alimentarClick() {setStatus("feliz")}
 
-    function mortoClick() {setStatus("morto")}
+    function hidratarClick() {setStatus("morto")}
 
-    function doenteClick() {setStatus("doente")}
+    function alternarLuzClick() {setStatus("doente")}
     
     function cicloClick() {
         switch(status) {
@@ -35,18 +35,20 @@ export default function Emoji() {
     }
 
     return (
-        <>
-            <div className="emoji">{EmojiMap.get(status) || "🙃"}</div>
-            <Atributo emoji="❤️"/>
-            <Atributo emoji="🍗"/>
-            <Atributo emoji="🔋"/>
-            <Atributo emoji="💧"/>
+        <div className="emoji">
+            <div className="rosto">{EmojiMap.get(status) || "🙃"}</div>
+            <div className="atributos">
+                <Atributo emoji="❤️"/>
+                <Atributo emoji="🍗"/>
+                <Atributo emoji="🔋"/>
+                <Atributo emoji="💧"/>
+            </div>
             <div className="acoes">
-                <button onClick={felizClick}>Feliz</button>
-                <button onClick={mortoClick}>Morto</button>
-                <button onClick={doenteClick}>Doente</button>
+                <button onClick={alimentarClick}>Alimentar</button>
+                <button onClick={hidratarClick}>Hidratar</button>
+                <button onClick={alternarLuzClick}>Ligar/Desligar luz</button>
                 <button onClick={cicloClick}>Ciclo</button>
             </div>
-        </>
+        </div>
     )
 }
