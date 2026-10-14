@@ -1,7 +1,11 @@
 import { useState } from "react"
 import "./atributo.css"
 
-export default function Atributo() {     
+type AtributoProps = {
+    emoji: string;
+}
+
+export default function Atributo({emoji}:AtributoProps) {     
     const [valor,setValor] = useState<number>(1)
 
     function coracaoClick() {
@@ -14,7 +18,7 @@ export default function Atributo() {
 
     return (
         <>
-            <div className="atributo">{valor} {"❤️".repeat(valor)}<span className="inativo">{"❤️".repeat(5 - valor)}</span></div>
+            <div className="atributo">{valor} {emoji.repeat(valor)}<span className="inativo">{emoji.repeat(5 - valor)}</span></div>
             <button onClick={coracaoClick}>+</button>
         </>
     )

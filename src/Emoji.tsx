@@ -37,7 +37,10 @@ export default function Emoji() {
     return (
         <>
             <div className="emoji">{EmojiMap.get(status) || "🙃"}</div>
-            <Atributo/>
+            <Atributo emoji="❤️"/>
+            <Atributo emoji="🍗"/>
+            <Atributo emoji="🔋"/>
+            <Atributo emoji="💧"/>
             <div className="acoes">
                 <button onClick={felizClick}>Feliz</button>
                 <button onClick={mortoClick}>Morto</button>
