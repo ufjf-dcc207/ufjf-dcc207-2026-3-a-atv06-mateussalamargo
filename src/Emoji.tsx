@@ -11,7 +11,6 @@ const EmojiMap = new Map<EmojiKeys, string>([
 ]);
 
 export default function Emoji() {
-    const [status, setStatus] = useState<EmojiKeys>("feliz");
     const [vida,setVida] = useState<number>(5)
     const [energia,setEnergia] = useState<number>(5)
     const [comida,setComida] = useState<number>(2)
@@ -19,11 +18,15 @@ export default function Emoji() {
     const [luz,setLuz] = useState<boolean>(true)
 
     function alimentarClick() {
-        setComida(Math.min(5,comida+1))
+        if(vida !== 0) {
+            setComida(Math.min(5,comida+1))
+        }
     }
 
     function hidratarClick() {
-        setAgua(Math.min(5,agua+1))
+        if(vida !== 0) {
+            setAgua(Math.min(5,agua+1))
+        }
     }
 
     function alternarLuzClick() {
@@ -33,11 +36,13 @@ export default function Emoji() {
     function cicloClick() {
         setComida(Math.max(0,comida-1))
         setAgua(Math.max(0,agua-1))
-        if(luz) {
+        if(luz && vida !== 0) {
             setEnergia(Math.max(0,energia-1))
         }
         else {
-            setEnergia(Math.min(5,energia+1))     
+            if(vida !== 0) {
+                setEnergia(Math.min(5,energia+1))     
+            }
         }
         if(agua === 0) {
             setVida((prevVida) => (Math.max(0,prevVida-1)))
@@ -50,9 +55,17 @@ export default function Emoji() {
         }
     }
 
+    let status = EmojiMap.get("feliz")
+    if((agua === 0 || energia === 0 || comida === 0) && vida !== 0) {
+        status = EmojiMap.get("doente")
+    }
+    if(vida === 0) {
+        status = EmojiMap.get("morto")
+    }
+
     return (
         <div className="emoji">
-            <div className="rosto">{EmojiMap.get(status) || "🙃"}</div>
+            <div className="rosto">{status}</div>
             <div className="atributos">
                 <Atributo emoji="❤️" valor={vida}/>
                 <Atributo emoji="🍗" valor={comida}/>
