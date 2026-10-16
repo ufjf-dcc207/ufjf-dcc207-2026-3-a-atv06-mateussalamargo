@@ -12,23 +12,21 @@ const EmojiMap = new Map<EmojiKeys, string>([
 
 export default function Emoji() {
     const [emoji,setEmoji] = useState<EmojiType>({
-        agua: 0,
-        comida: 0,
+        agua: 5,
+        comida: 5,
         energia: 5,
         luz: true,
         vida: 5,
     });
     
     function alimentarClick() {
-        if(emoji.vida === 0) return;
-        emoji.comida = Math.min(5, emoji.comida+1);
-        const novoEmoji = structuredClone(emoji);
-        setEmoji(novoEmoji)
+        if(emoji.vida === 0) return
+        setEmoji({...emoji, comida: Math.min(5, emoji.comida+1)})
     }
 
     function hidratarClick() {
-        if(emoji.vida === 0) return;
-        setEmoji({...emoji, agua: Math.min(5, emoji.agua+1)});
+        if(emoji.vida === 0) return
+        setEmoji({...emoji, agua: Math.min(5, emoji.agua+1)})
     }
 
     function alternarLuzClick() {
@@ -36,25 +34,23 @@ export default function Emoji() {
     }
     
     function cicloClick() {
-        /*setComida(Math.max(0,comida-1))
-        setAgua(Math.max(0,agua-1))
-        if(luz && vida !== 0) {
-            setEnergia(Math.max(0,energia-1))
+        if(emoji.vida === 0) return
+        setEmoji({...emoji, comida: Math.max(0,emoji.comida-1), agua: Math.max(0,emoji.agua-1)})
+        if(emoji.luz) {
+            setEmoji((prevEmoji) => ({...prevEmoji, energia: Math.max(0,prevEmoji.energia-1)}))
         }
         else {
-            if(vida !== 0) {
-                setEnergia(Math.min(5,energia+1))     
-            }
+            setEmoji((prevEmoji) => ({...prevEmoji, energia: Math.min(5,prevEmoji.energia+1)}))
         }
-        if(agua === 0) {
-            setVida((prevVida) => (Math.max(0,prevVida-1)))
+        if(emoji.agua === 0) {
+            setEmoji((prevEmoji) => ({...prevEmoji, vida: Math.max(0,prevEmoji.vida-1)}))
         }
-        if(energia === 0) {
-            setVida((prevVida) => (Math.max(0,prevVida-1)))
+        if(emoji.energia === 0) {
+            setEmoji((prevEmoji) => ({...prevEmoji, vida: Math.max(0,prevEmoji.vida-1)}))
         }
-        if(comida === 0) {
-            setVida((prevVida) => (Math.max(0,prevVida-1)))
-        }*/
+        if(emoji.comida === 0) {
+            setEmoji((prevEmoji) => ({...prevEmoji, vida: Math.max(0,prevEmoji.vida-1)}))
+        }
     }
 
     let status = EmojiMap.get("feliz")
