@@ -12,27 +12,27 @@ const EmojiMap = new Map<EmojiKeys, string>([
 
 export default function Emoji() {
     const [emoji,setEmoji] = useState<EmojiType>({
-        agua: 5,
-        comida: 5,
+        agua: 0,
+        comida: 0,
         energia: 5,
         luz: true,
         vida: 5,
     });
     
     function alimentarClick() {
-        /*if(vida !== 0) {
-            setComida(Math.min(5,comida+1))
-        }*/
+        if(emoji.vida === 0) return;
+        emoji.comida = Math.min(5, emoji.comida+1);
+        const novoEmoji = structuredClone(emoji);
+        setEmoji(novoEmoji)
     }
 
     function hidratarClick() {
-        /*if(vida !== 0) {
-            setAgua(Math.min(5,agua+1))
-        }*/
+        if(emoji.vida === 0) return;
+        setEmoji({...emoji, agua: Math.min(5, emoji.agua+1)});
     }
 
     function alternarLuzClick() {
-        //setLuz(!luz)
+        setEmoji({...emoji, luz: !emoji.luz})
     }
     
     function cicloClick() {
