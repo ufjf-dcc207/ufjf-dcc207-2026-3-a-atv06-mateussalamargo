@@ -35,22 +35,26 @@ export default function Emoji() {
     
     function cicloClick() {
         if(emoji.vida === 0) return
-        setEmoji({...emoji, comida: Math.max(0,emoji.comida-1), agua: Math.max(0,emoji.agua-1)})
+        
+        const novoEmoji = structuredClone(emoji)
+        novoEmoji.comida = Math.max(0,novoEmoji.comida-1) 
+        novoEmoji.agua = Math.max(0,novoEmoji.agua-1)
         if(emoji.luz) {
-            setEmoji((prevEmoji) => ({...prevEmoji, energia: Math.max(0,prevEmoji.energia-1)}))
+            novoEmoji.energia = Math.max(0,novoEmoji.energia-1)
         }
         else {
-            setEmoji((prevEmoji) => ({...prevEmoji, energia: Math.min(5,prevEmoji.energia+1)}))
+            novoEmoji.energia = Math.min(5,novoEmoji.energia+1)
         }
         if(emoji.agua === 0) {
-            setEmoji((prevEmoji) => ({...prevEmoji, vida: Math.max(0,prevEmoji.vida-1)}))
+            novoEmoji.vida = Math.max(0,novoEmoji.vida-1)
         }
         if(emoji.energia === 0) {
-            setEmoji((prevEmoji) => ({...prevEmoji, vida: Math.max(0,prevEmoji.vida-1)}))
+            novoEmoji.vida = Math.max(0,novoEmoji.vida-1)
         }
         if(emoji.comida === 0) {
-            setEmoji((prevEmoji) => ({...prevEmoji, vida: Math.max(0,prevEmoji.vida-1)}))
+            novoEmoji.vida = Math.max(0,novoEmoji.vida-1)
         }
+        setEmoji(novoEmoji)
     }
 
     let status = EmojiMap.get("feliz")
