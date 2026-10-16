@@ -1,9 +1,9 @@
 import { useState } from "react";
 import Atributo from "./Atributo";
-import './emoji.css'
+import './emoji.css';
+import type { EmojiType } from "./Types";
 
 type EmojiKeys = "feliz" | "morto" | "doente";
-
 const EmojiMap = new Map<EmojiKeys, string>([
     ["feliz", "🙃"],
     ["morto", "😵"],
@@ -11,30 +11,32 @@ const EmojiMap = new Map<EmojiKeys, string>([
 ]);
 
 export default function Emoji() {
-    const [vida,setVida] = useState<number>(5)
-    const [energia,setEnergia] = useState<number>(5)
-    const [comida,setComida] = useState<number>(2)
-    const [agua,setAgua] = useState<number>(0)
-    const [luz,setLuz] = useState<boolean>(true)
-
+    const [emoji,setEmoji] = useState<EmojiType>({
+        agua: 5,
+        comida: 5,
+        energia: 5,
+        luz: true,
+        vida: 5,
+    });
+    
     function alimentarClick() {
-        if(vida !== 0) {
+        /*if(vida !== 0) {
             setComida(Math.min(5,comida+1))
-        }
+        }*/
     }
 
     function hidratarClick() {
-        if(vida !== 0) {
+        /*if(vida !== 0) {
             setAgua(Math.min(5,agua+1))
-        }
+        }*/
     }
 
     function alternarLuzClick() {
-        setLuz(!luz)
+        //setLuz(!luz)
     }
     
     function cicloClick() {
-        setComida(Math.max(0,comida-1))
+        /*setComida(Math.max(0,comida-1))
         setAgua(Math.max(0,agua-1))
         if(luz && vida !== 0) {
             setEnergia(Math.max(0,energia-1))
@@ -52,14 +54,14 @@ export default function Emoji() {
         }
         if(comida === 0) {
             setVida((prevVida) => (Math.max(0,prevVida-1)))
-        }
+        }*/
     }
 
     let status = EmojiMap.get("feliz")
-    if((agua === 0 || energia === 0 || comida === 0) && vida !== 0) {
+    if((emoji.agua === 0 || emoji.energia === 0 || emoji.comida === 0) && emoji.vida !== 0) {
         status = EmojiMap.get("doente")
     }
-    if(vida === 0) {
+    if(emoji.vida === 0) {
         status = EmojiMap.get("morto")
     }
 
@@ -67,16 +69,16 @@ export default function Emoji() {
         <div className="emoji">
             <div className="rosto">{status}</div>
             <div className="atributos">
-                <Atributo emoji="❤️" valor={vida}/>
-                <Atributo emoji="🍗" valor={comida}/>
-                <Atributo emoji="🔋" valor={energia}/>
-                <Atributo emoji="💧" valor={agua}/>
-                {luz && "💡"}
+                <Atributo emoji="❤️" valor={emoji.vida}/>
+                <Atributo emoji="🍗" valor={emoji.comida}/>
+                <Atributo emoji="🔋" valor={emoji.energia}/>
+                <Atributo emoji="💧" valor={emoji.agua}/>
+                {emoji.luz && "💡"}
             </div>
             <div className="acoes">
                 <button onClick={alimentarClick}>Alimentar</button>
                 <button onClick={hidratarClick}>Hidratar</button>
-                <button onClick={alternarLuzClick}>{luz? "Desligar": "Ligar"}</button>
+                <button onClick={alternarLuzClick}>{emoji.luz? "Desligar": "Ligar"}</button>
                 <button onClick={cicloClick}>Ciclo</button>
             </div>
         </div>
